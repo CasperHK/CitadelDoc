@@ -14,6 +14,19 @@ CitadelDoc 是一個基於 **Go 語言** 與 **Grit 框架** 構建的企業級*
 
 ---
 
+### 📊 內建審計日誌 (Built-in Audit Logging)
+
+CitadelDoc 具備嚴格的行為審計能力。系統內建的審計中間件會攔截每一個文檔存取請求，並即時記錄以下維度，以便進行合規性審查與異常行為分析（如：集中的文檔拖取行為）：
+
+- **WHO**：存取使用者的唯一識別碼（如 User ID、Email 或 員工編號）
+- **WHEN**：精確到毫秒的存取時間戳（Timestamp）
+- **WHAT**：使用者請求的具體文檔路徑（Document URI）
+- **WHERE**：請求來源的客戶端真實 IP 位址（Client IP）與 User-Agent
+
+日誌預設輸出至標準輸出（Stdout），並可輕鬆對接企業內部的 **SIEM（安全資訊和事件管理）伺服器**、ELK Stack 或專屬的審計資料庫。
+
+---
+
 ## 🏗️ 技術棧架構
 
 CitadelDoc 採用現代化且注重安全高效的架構設計：
