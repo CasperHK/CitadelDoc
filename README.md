@@ -45,6 +45,18 @@ CitadelDoc 採用「讀寫分離、設計開放」的權限模型，確保前端
 
 ---
 
+## 🌐 Active Directory (AD) 系統整合
+
+CitadelDoc 支援原生整合 Windows Active Directory / LDAP 伺服器，實現企業級的統一身份驗證與自動化權限指派：
+
+1. **認證 (Authentication)**：編輯者在 `/admin/login` 輸入 AD 帳號密碼，後端透過安全連接（LDAPS / TLS）向 AD 網域控制器進行 Bind 認證。
+2. **授權 (Authorization)**：認證成功後，系統會自動拉取該用戶的 `memberOf`（群組成員身份）與 `department`（部門）屬性。
+3. **動態對應**：
+   - 只有屬於指定 AD 群組（例如 `CN=CitadelDoc_Editors,OU=Groups,DC=domain,DC=local`）的用戶，系統才會核發代表編輯者權限的 JWT Token。
+   - 所有人（包含一般 AD 用戶或訪客）皆可直接訪問前端進行介面設計與文檔閱讀。
+
+---
+
 ## 🏗️ 技術棧架構
 
 CitadelDoc 採用現代化且注重安全高效的架構設計：
